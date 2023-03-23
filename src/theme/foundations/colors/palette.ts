@@ -1,0 +1,16 @@
+export const palette = Object.freeze({
+  almostWhite: '#FEFEFE',
+  antiFlashWhite: '#F3F3F4',
+  black: '#000000',
+  blueChill: '#118AB2',
+  caribbeanGreen: '#06D6A0',
+  eerieBlack: '#212529',
+  frenchGray: '#ADB5BD',
+  frenchRose: '#EF476F',
+  goldenTainoi: '#FFD166',
+  outerSpace: '#495057',
+  platinum: '#DEE2E6',
+  seasalt: '#F8F9FA',
+  tarawera: '#073B4C',
+  white: '#FFFFFF',
+} as const);
