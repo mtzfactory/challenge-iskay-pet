@@ -11,7 +11,12 @@ export const Hero = (props: Props) => {
   const heroStyle = enhanceStyle(styles.hero, styleOverride);
 
   return (
-    <Text {...rest} center variant="h1" style={heroStyle}>
+    <Text
+      {...rest}
+      accessibilityRole="header"
+      center
+      variant="h1"
+      style={heroStyle}>
       {text}
     </Text>
   );
