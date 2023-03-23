@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "link-assets": "npx react-native-asset",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"

@@ -1,0 +1,45 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Black.otf",
+      "sha1": "94c9a8f970678781fb922ceefd77a1974feea96e"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Bold.otf",
+      "sha1": "a88aa713b7cdada0016869ed3548aa9c4e4f18b5"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-ExtraBold.otf",
+      "sha1": "ab9c38de64ab1be8a704078f995cb2a82ec23abe"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-ExtraLight.otf",
+      "sha1": "3e3eb34473ff978ae81339acd9f7b28d0369deba"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Italic.otf",
+      "sha1": "43e14b2056deca9342912bf8d546aa3871ee1715"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Light.otf",
+      "sha1": "ee6a7d058b354822c7b4b3b0075bfc26081d29f5"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Medium.otf",
+      "sha1": "595cf06c2cd83ab2e0ccd5b74e247f534d139899"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Regular.otf",
+      "sha1": "a3f5403e26df9e0dfcabd5c17bdf29662fbe96c2"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-SemiBold.otf",
+      "sha1": "db55f109eb4b0f28fa0a9e18347a506d3ee2240f"
+    },
+    {
+      "path": "assets/fonts/Montserrat/Montserrat-Thin.otf",
+      "sha1": "b19297a758a94393394a7955841b178d935b9c64"
+    }
+  ]
+}
