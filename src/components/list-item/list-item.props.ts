@@ -1,6 +1,6 @@
-import {ViewPropsWithoutRefAndOmit} from '~/toolbox';
+import {ViewPropsWithoutRef} from '~/toolbox';
 
-export interface ListItemProps extends ViewPropsWithoutRefAndOmit<'children'> {
+export interface ListItemProps extends ViewPropsWithoutRef {
   title: string;
   description: string;
 }
