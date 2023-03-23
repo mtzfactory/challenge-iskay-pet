@@ -2,18 +2,19 @@ import * as React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 
 import {appStyles as styles} from '~/app.styles';
-import {BASE_URL, STORES_ENDPOINT} from '~/config';
-import {get} from '~/infra/http';
 import {Store} from '~/models/store';
 import {Hero, StoreList} from '~/components';
+import {getIkpStores} from '~/services/ikp-client';
 
 function App() {
   const [ikpStores, setIkpStores] = React.useState<Store[]>([]);
 
   React.useEffect(function () {
     async function getStores() {
-      const stores = await get<Store[]>(`${BASE_URL}${STORES_ENDPOINT}`);
-      setIkpStores(stores);
+      const {data: stores, error} = await getIkpStores();
+      if (stores) {
+        setIkpStores(stores);
+      }
     }
 
     getStores();
