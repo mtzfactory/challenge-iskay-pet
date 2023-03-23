@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* iskayPetChallengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* iskayPetChallengeTests.m */; };
+		0A69EB0329CCB2E30005FF44 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A69EB0229CCB2E30005FF44 /* Feather.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-iskayPetChallenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-iskayPetChallenge.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -40,6 +41,7 @@
 		00E356EE1AD99517003FC87E /* iskayPetChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iskayPetChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* iskayPetChallengeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iskayPetChallengeTests.m; sourceTree = "<group>"; };
+		0A69EB0229CCB2E30005FF44 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* iskayPetChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iskayPetChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iskayPetChallenge/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = iskayPetChallenge/AppDelegate.mm; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		F755685F2DF94B0593779E45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A69EB0229CCB2E30005FF44 /* Feather.ttf */,
 				2CB5E4225EA94C1D837313F7 /* Montserrat-Black.otf */,
 				4B7C39D445544DFC8D7F1344 /* Montserrat-Bold.otf */,
 				C03AAD883933473C901FA2C6 /* Montserrat-ExtraBold.otf */,
@@ -289,6 +292,7 @@
 				F4E09A599E05499EAC1BA86B /* Montserrat-Italic.otf in Resources */,
 				FBB6B27276894A049FF032B7 /* Montserrat-Light.otf in Resources */,
 				36A7F6F8907C4748AB5F5211 /* Montserrat-Medium.otf in Resources */,
+				0A69EB0329CCB2E30005FF44 /* Feather.ttf in Resources */,
 				C13EB9D7191D43C2B7E65AB5 /* Montserrat-Regular.otf in Resources */,
 				257C2D3CA37D4A6DACABEAF5 /* Montserrat-SemiBold.otf in Resources */,
 				3EBDA123F7DE4299A9E3CB9D /* Montserrat-Thin.otf in Resources */,
