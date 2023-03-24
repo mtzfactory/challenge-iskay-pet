@@ -1,4 +1,4 @@
-import type {Text, View} from 'react-native';
+import type {Pressable, Text, View} from 'react-native';
 
 /**
  * Type for not defined.
@@ -14,6 +14,23 @@ export type None = null | undefined;
  *   └─ type NullableT = string | null | undefined
  */
 export type Nullable<T> = T | None;
+
+/**
+ * Pressable component props without ref.
+ */
+export type PressablePropsWithoutRef = React.ComponentPropsWithoutRef<
+  typeof Pressable
+>;
+
+/**
+ * Pressable component props without ref that allows omit specific props.
+ *
+ * @example
+ *   PressablePropsWithoutRefAndOmit<"children" | "onPress">
+ */
+export type PressablePropsWithoutRefAndOmit<
+  T extends keyof PressablePropsWithoutRef,
+> = Omit<PressablePropsWithoutRef, T>;
 
 /**
  * View component props without ref.

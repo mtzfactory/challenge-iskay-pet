@@ -9,6 +9,8 @@ import {StyleSheet} from 'react-native';
 
 import type {Nullable} from './typescript';
 
+const DEFAULT_OPACITY = 0.7;
+
 /**
  * Flattens a list of style objects, into one aggregated style object.
  *
@@ -23,3 +25,16 @@ export const enhanceStyle = <
 >(
   ...styles: T
 ) => StyleSheet.flatten(styles);
+
+/**
+ * Get opacity style.
+ *
+ * @param flag - True to set the opacity.
+ * @param opacity - Optional value for the opacity. Default to 0.7.
+ */
+export const getOpacityStyle = (
+  flag: boolean | null,
+  opacity = DEFAULT_OPACITY,
+): ViewStyle => ({
+  opacity: flag ? opacity : 1,
+});
