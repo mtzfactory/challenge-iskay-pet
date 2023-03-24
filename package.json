@@ -13,6 +13,8 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.71.4",
+    "react-native-config": "^1.5.0",
+    "react-native-maps": "^1.4.0",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
