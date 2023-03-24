@@ -7,7 +7,7 @@
 
 # IskayPet Mobile Challenge
 
-Soluiton to the [IskayPet Mobile Challenge][ikp-mobile-challenge].
+Solution to the [IskayPet Mobile Challenge][ikp-mobile-challenge].
 
 ## Install dependencies
 
