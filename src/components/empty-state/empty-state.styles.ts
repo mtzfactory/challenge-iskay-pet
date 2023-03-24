@@ -10,7 +10,7 @@ interface Styles {
 }
 
 export const emptyStateStyles = StyleSheet.create<Styles>({
-  container: composeStyle({marginTop: '-50%'}, 'center', 'expand'),
+  container: composeStyle({}, 'center', 'expand'),
   iconContainer: {marginBottom: theme.spacing.medium},
   text: {
     color: theme.colors.primary.green,
