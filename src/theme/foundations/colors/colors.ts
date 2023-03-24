@@ -2,6 +2,7 @@ import {palette} from './palette';
 
 const DEFAULT_BACKGROUND_COLOR = palette.antiFlashWhite;
 const DEFAULT_TEXT_COLOR = palette.eerieBlack;
+const DEFAULT_ALPHA = 0.55;
 
 export const colors = Object.freeze({
   accent: palette.goldenTainoi,
@@ -25,4 +26,5 @@ export const colors = Object.freeze({
   },
   text: DEFAULT_TEXT_COLOR,
   transparent: 'rgba(0, 0, 0, 0)',
+  translucent: (alpha = DEFAULT_ALPHA) => `rgba(0, 0, 0, ${alpha})`,
 } as const);

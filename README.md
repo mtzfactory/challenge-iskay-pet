@@ -76,6 +76,8 @@ yarn { android | ios }
 1. Group markers: using [react-native-map-clustering][react-native-map-clustering-package]
    or [react-native-clusterer][react-native-clusterer-package]
 
+2. Check if permissions changed when [app get focus again][appstate-listener].
+
 ## Troubleshooting
 
 ### Android
@@ -90,6 +92,7 @@ yarn { android | ios }
   androidMapsUtilsVersion = "0.5+"
   ```
 
+[appstate-listener]: https://reactnative.dev/docs/appstate/#addeventlistener
 [environment-setup]: https://reactnative.dev/docs/environment-setup
 [google-maps]: https://developers.google.com/maps/documentation/
 [ikp-mobile-challenge]: https://github.com/manuelabarca/ikp-mobile-challenge

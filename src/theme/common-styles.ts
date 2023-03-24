@@ -7,6 +7,8 @@ interface Styles {
   backgroundColor: ViewStyle;
   center: ViewStyle;
   expand: ViewStyle;
+  justifyCenter: ViewStyle;
+  row: ViewStyle;
 }
 
 type StylesKeys = keyof Styles;
@@ -18,6 +20,8 @@ const commonStyles: Styles = {
     justifyContent: 'center',
   },
   expand: {flex: 1},
+  justifyCenter: {justifyContent: 'center'},
+  row: {flexDirection: 'row'},
 };
 
 export function composeStyle<S extends ImageStyle | TextStyle | ViewStyle>(

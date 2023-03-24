@@ -60,7 +60,7 @@ const lineHeight = {
   m: 14,
   l: 18,
   xl: 22,
-  xxl: 26,
+  xxl: 30,
 } as const;
 
 /**
