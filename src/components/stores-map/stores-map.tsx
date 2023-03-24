@@ -5,6 +5,7 @@ import type {MarkerPressEvent} from 'react-native-maps';
 import type {Store} from '~/models';
 
 import {StoresMapProps as Props} from './stores-map.props';
+import {LocationPermission} from '~/components/location-permision';
 
 const INITIAL_REGION = {
   latitude: 40.2369319,
@@ -36,10 +37,7 @@ export const StoresMap = (props: Props) => {
 
   function handleOnLayoutMapView() {
     setTimeout(function () {
-      mapRef?.current?.fitToElements({
-        animated: true,
-        edgePadding: {top: 140, bottom: 80, left: 80, right: 80},
-      });
+      mapRef?.current?.fitToElements({animated: true});
     }, 1000);
   }
 
@@ -54,15 +52,18 @@ export const StoresMap = (props: Props) => {
   }
 
   return (
-    <MapView
-      {...rest}
-      ref={mapRef}
-      initialRegion={INITIAL_REGION}
-      toolbarEnabled={false}
-      onLayout={handleOnLayoutMapView}
-      onMarkerPress={handleOnMarkerPress}
-      onPress={handleOnPressMapview}>
-      <StoreMarkers stores={stores} />
-    </MapView>
+    <LocationPermission>
+      <MapView
+        {...rest}
+        ref={mapRef}
+        initialRegion={INITIAL_REGION}
+        showsUserLocation={true}
+        toolbarEnabled={false}
+        onLayout={handleOnLayoutMapView}
+        onMarkerPress={handleOnMarkerPress}
+        onPress={handleOnPressMapview}>
+        <StoreMarkers stores={stores} />
+      </MapView>
+    </LocationPermission>
   );
 };
