@@ -22,7 +22,7 @@ yarn install
 ### Google Maps API Key
 
 On Android, one has to use [Google Maps][google-maps], which in turn requires
-you to obtain an [API key for the Android SDK][android-sdk-api-key].
+you to obtain an API key for the [Android SDK][sdk-api-key-android] or [iOS SDK][sdk-api-key-ios].
 
 The bundleId is `com.iskaypetchallenge`.
 
@@ -49,6 +49,8 @@ Update the file content:
 
 ## Start
 
+Before continue, please, ensure your [environment is configured properly][environment-setup].
+
 Just run the following command, selecting the proper platform you want run.
 
 ```bash
@@ -62,6 +64,9 @@ yarn { android | ios }
 
 - [react-native-maps][react-native-maps-package]: React Native Map components
   for iOS + Android
+
+- [react-native-permissions][react-native-permissions-package]: An unified
+  permissions API for React Native on iOS, Android and Windows.
 
 - [react-native-vector-icons][react-native-vector-icons-package]: Customizable
   Icons for React Native with support for image source and full styling.
@@ -81,16 +86,19 @@ yarn { android | ios }
 
   Add to `android/build.gradle`:
 
-  ```
+  ```gradle
   androidMapsUtilsVersion = "0.5+"
   ```
 
-[android-sdk-api-key]: https://developers.google.com/maps/documentation/android-sdk
+[environment-setup]: https://reactnative.dev/docs/environment-setup
 [google-maps]: https://developers.google.com/maps/documentation/
 [ikp-mobile-challenge]: https://github.com/manuelabarca/ikp-mobile-challenge
 [react-native-clusterer-package]: https://github.com/JiriHoffmann/react-native-clusterer
 [react-native-config-package]: https://github.com/luggit/react-native-config
+[react-native-permissions-package]: https://github.com/zoontek/react-native-permissions
 [react-native-map-clustering-package]: https://github.com/venits/react-native-map-clustering
 [react-native-maps-package]: https://github.com/react-native-maps/react-native-maps
 [react-native-vector-icons-package]: https://github.com/oblador/react-native-vector-icons
 [react-native-maps-issues-3081]: https://github.com/react-native-maps/react-native-maps/issues/3081
+[sdk-api-key-android]: https://developers.google.com/maps/documentation/android-sdk
+[sdk-api-key-ios]: https://developers.google.com/maps/documentation/ios-sdk
