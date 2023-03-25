@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TextStyle} from 'react-native';
 import type {ViewStyle, ColorValue} from 'react-native';
 
 import {theme} from '~/theme';
@@ -9,6 +9,8 @@ interface Styles {
   button: ViewStyle;
   content: ViewStyle;
   icon: ViewStyle;
+  smallButton: ViewStyle;
+  smallButtonLabel: TextStyle;
 }
 
 export const buttonStyles = StyleSheet.create<Styles>({
@@ -26,6 +28,8 @@ export const buttonStyles = StyleSheet.create<Styles>({
     flexDirection: 'row',
   },
   icon: {marginRight: theme.spacing.small},
+  smallButton: {height: 20},
+  smallButtonLabel: {fontSize: theme.typography.label.fontSize},
 });
 
 export const DEFAULT_ICON_COLOR: Record<ButtonVariants, ColorValue> = {

@@ -18,8 +18,9 @@ import {buttonVariants, labelVariants} from './button.variant';
  *
  * @param icon - Icon located in the left, optional.
  * @param iconStyle - Style of the icon, optional.
- * @param tilte - Text to display in the button, optional.
- * @param titleStyle - Style of the text, optional.
+ * @param label - Label to display in the button, optional.
+ * @param labelStyle - Style of the label, optional.
+ * @param small - True for a small button.
  * @param variant - Type of button.
  */
 export const Button = (props: Props) => {
@@ -31,18 +32,21 @@ export const Button = (props: Props) => {
     style: buttonStyleOverride,
     label,
     labelStyle: labelStyleOverride,
+    small = false,
     variant = 'default',
     ...rest
   } = props;
   const disabledStyle = getOpacityStyle(disabled);
   const buttonStyle = enhanceStyle([
     styles.button,
+    small && styles.smallButton,
     buttonVariants[variant],
     buttonStyleOverride,
     disabledStyle,
   ]);
   const labelStyle = enhanceStyle([
     labelVariants[variant],
+    small && styles.smallButtonLabel,
     labelStyleOverride,
     disabledStyle,
   ]);

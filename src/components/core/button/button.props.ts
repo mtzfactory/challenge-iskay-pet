@@ -14,6 +14,7 @@ type PressableBaseProps = PressablePropsWithoutRefAndOmit<'children' | 'style'>;
 type Children = PressableProps['children'];
 
 type ButtonBaseProps = {
+  small?: boolean;
   variant?: ButtonVariants;
   style?: StyleProp<ViewStyle>;
 };
