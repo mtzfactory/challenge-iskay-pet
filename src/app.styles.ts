@@ -12,8 +12,8 @@ interface Styles {
 }
 
 export const appStyles = StyleSheet.create<Styles>({
-  container: composeStyle({flex: 1}, 'backgroundColor', 'expand'),
+  container: composeStyle({}, 'backgroundColor', 'expand'),
   hero: {marginVertical: theme.spacing.medium},
   map: {flex: 2},
-  storeList: {flex: 1},
+  storeList: composeStyle({}, 'expand'),
 });

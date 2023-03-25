@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {Store} from '~/models/store';
 import {Hero, StoreList, StoresMap, useStoreListRef} from '~/components';
@@ -43,24 +44,26 @@ function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={styles.container.backgroundColor}
-      />
-      <StoresMap
-        stores={ikpStores}
-        onStoreSelect={handleOnStoreSelect}
-        onStoreDeselect={handleOnStoreDeselect}
-        style={styles.map}
-      />
-      <Hero text="IskayPet Challenge" style={styles.hero} />
-      <StoreList
-        ref={storeListRef}
-        stores={ikpStores}
-        style={styles.storeList}
-      />
-    </SafeAreaView>
+    <GestureHandlerRootView style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor={styles.container.backgroundColor}
+        />
+        <StoresMap
+          stores={ikpStores}
+          onStoreSelect={handleOnStoreSelect}
+          onStoreDeselect={handleOnStoreDeselect}
+          style={styles.map}
+        />
+        <Hero text="IskayPet Challenge" style={styles.hero} />
+        <StoreList
+          ref={storeListRef}
+          stores={ikpStores}
+          style={styles.storeList}
+        />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 

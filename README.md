@@ -21,12 +21,12 @@ yarn install
 
 ### Google Maps API Key
 
-On Android, one has to use [Google Maps][google-maps], which in turn requires
-you to obtain an API key for the [Android SDK][sdk-api-key-android] or [iOS SDK][sdk-api-key-ios].
+To use [Google Maps][google-maps], you to obtain an API key for the [Android SDK][sdk-api-key-android]
+or the [iOS SDK][sdk-api-key-ios].
 
 The bundleId is `com.iskaypetchallenge`.
 
-To obtain the signing-certificate fingerprint (SHA1) of the application, please,
+To obtain the signing-certificate fingerprint (SHA1) of the Android application, please,
 use this command:
 
 ```bash
@@ -35,14 +35,14 @@ keytool -keystore android/app/debug.keystore -list -v
 
 ### Env file
 
-Create a `.env` file in the root of the project, use this command:
+Create a `.env` file in the root directory of the project, you can use this command:
 
 ```bash
 cp .env.example .env
 
 ```
 
-Update the file content:
+Finally, update the file content:
 
 - `GOOGLE_MAPS_ANROID_API_KEY`, the key obtained in #google-maps-api-key for Android.
 - `GOOGLE_MAPS_IOS_API_KEY`, the key obtained in #google-maps-api-key for iOS.
@@ -51,22 +51,35 @@ Update the file content:
 
 Before continue, please, ensure your [environment is configured properly][environment-setup].
 
-Just run the following command, selecting the proper platform you want run.
+To run the application, just execute the following command:
 
 ```bash
-yarn { android | ios }
+yarn android
 ```
+
+**Disclosure**: The application has been tested only in Android devices, since
+my computer is a _Macbook Pro from 2012_, which can not be updated to last OS version,
+therefore I can not build and test the iOS version.
 
 ## Packages
 
+- [react-native-bottom-sheet][react-native-bottom-sheet-package]: A performant
+  interactive bottom sheet with fully configurable options.
+
 - [react-native-config][react-native-config-package]: Module to expose config
   variables to your javascript code in React Native, supporting iOS, Android.
+
+- [react-native-gesture-handler][react-native-gesture-handler-package]: Declarative
+  API exposing platform native touch and gesture system to React Native.
 
 - [react-native-maps][react-native-maps-package]: React Native Map components
   for iOS + Android
 
 - [react-native-permissions][react-native-permissions-package]: An unified
   permissions API for React Native on iOS, Android and Windows.
+
+- [react-native-reanimated][react-native-reanimated-package]: React Native's
+  Animated library reimplemented
 
 - [react-native-vector-icons][react-native-vector-icons-package]: Customizable
   Icons for React Native with support for image source and full styling.
@@ -82,9 +95,9 @@ yarn { android | ios }
 
 ### Android
 
-- Invariant Violation: requireNativeComponent: "AIRMap" was not found in the UI Manager.
+- _Invariant Violation: requireNativeComponent: "AIRMap" was not found in the UI Manager_.
 
-  Soluiton: [issue #3081][react-native-maps-issues-3081]
+  Solution: [issue #3081][react-native-maps-issues-3081].
 
   Add to `android/build.gradle`:
 
@@ -96,9 +109,12 @@ yarn { android | ios }
 [environment-setup]: https://reactnative.dev/docs/environment-setup
 [google-maps]: https://developers.google.com/maps/documentation/
 [ikp-mobile-challenge]: https://github.com/manuelabarca/ikp-mobile-challenge
+[react-native-bottom-sheet-package]: https://github.com/gorhom/react-native-bottom-sheet
 [react-native-clusterer-package]: https://github.com/JiriHoffmann/react-native-clusterer
 [react-native-config-package]: https://github.com/luggit/react-native-config
+[react-native-gesture-handler-package]: https://github.com/software-mansion/react-native-gesture-handler
 [react-native-permissions-package]: https://github.com/zoontek/react-native-permissions
+[react-native-reanimated-package]: https://github.com/software-mansion/react-native-reanimated
 [react-native-map-clustering-package]: https://github.com/venits/react-native-map-clustering
 [react-native-maps-package]: https://github.com/react-native-maps/react-native-maps
 [react-native-vector-icons-package]: https://github.com/oblador/react-native-vector-icons
