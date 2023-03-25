@@ -1,9 +1,11 @@
-import {ImageStyle, StyleSheet, TextStyle} from 'react-native';
-import type {ViewStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
+import type {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
 import {theme} from '~/theme/theme';
 
 interface Styles {
+  absoluteFill: ViewStyle;
+  alignCenter: ViewStyle;
   backgroundColor: ViewStyle;
   center: ViewStyle;
   expand: ViewStyle;
@@ -13,7 +15,11 @@ interface Styles {
 
 type StylesKeys = keyof Styles;
 
+const absoluteFill = Object.assign({} as ViewStyle, StyleSheet.absoluteFill);
+
 const commonStyles: Styles = {
+  absoluteFill,
+  alignCenter: {alignItems: 'center'},
   backgroundColor: {backgroundColor: theme.colors.backgroundColor},
   center: {
     alignItems: 'center',
