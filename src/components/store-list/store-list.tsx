@@ -39,7 +39,7 @@ const ForwardStoreList: React.ForwardRefRenderFunction<Handle, Props> = (
     () => {
       return {
         scrollToIndex(index: number) {
-          flatListRef.current?.scrollToIndex({index});
+          flatListRef.current?.scrollToIndex({index, animated: true});
         },
       };
     },
