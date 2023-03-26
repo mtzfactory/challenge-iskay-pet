@@ -1,6 +1,8 @@
 import {ViewPropsWithoutRef} from '~/toolbox';
 
 export interface ListItemProps extends ViewPropsWithoutRef {
-  title: string;
+  disabled?: boolean;
   description: string;
+  title: string;
+  onPress?: () => void;
 }
