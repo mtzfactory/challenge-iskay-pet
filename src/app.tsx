@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {SafeAreaView, StatusBar, View} from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {
   Hero,
@@ -9,9 +8,11 @@ import {
   StoresMap,
   useStoreListRef,
   useStoresMapRef,
+  withModalProvider,
 } from '~/components';
 import {Button, Icon, Text} from '~/components/core';
 import type {Store} from '~/models/store';
+import {withGestureHandlerProvider} from '~/providers/with-gesture-handler';
 import {ikpClient} from '~/services/ikp-client';
 import {theme} from '~/theme';
 import type {Nullable} from '~/toolbox';
@@ -72,7 +73,7 @@ function App() {
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <>
       <SafeAreaView style={styles.container}>
         <StatusBar
           barStyle="dark-content"
@@ -160,8 +161,8 @@ function App() {
           </View>
         ))}
       </ModalSheet>
-    </GestureHandlerRootView>
+    </>
   );
 }
 
-export default App;
+export default withGestureHandlerProvider(withModalProvider(App));
