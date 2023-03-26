@@ -8,6 +8,7 @@ import {
   StoreList,
   StoresMap,
   useStoreListRef,
+  useStoresMapRef,
 } from '~/components';
 import {Button, Icon, Text} from '~/components/core';
 import type {Store} from '~/models/store';
@@ -26,11 +27,11 @@ function App() {
   const [ikpStores, setIkpStores] = React.useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = React.useState<SelectedStore>(null);
   const storeListRef = useStoreListRef();
+  const storesMapRef = useStoresMapRef();
 
   React.useEffect(function () {
     async function getStores() {
       const {data: stores, error} = await ikpClient.getStores();
-      console.log('stores', stores, 'error:', error);
       if (stores) {
         setIkpStores(stores);
       }
@@ -65,6 +66,11 @@ function App() {
     console.log('data:', data, 'error:', error);
   }
 
+  function handleOnPressStoreListItem(store: Store, index: number) {
+    storesMapRef.current?.selectStore(store);
+    handleOnStoreSelect(store, index);
+  }
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaView style={styles.container}>
@@ -73,6 +79,7 @@ function App() {
           backgroundColor={styles.container.backgroundColor}
         />
         <StoresMap
+          ref={storesMapRef}
           stores={ikpStores}
           onStoreSelect={handleOnStoreSelect}
           onStoreDeselect={handleOnStoreDeselect}
@@ -82,6 +89,7 @@ function App() {
         <StoreList
           ref={storeListRef}
           stores={ikpStores}
+          onPress={handleOnPressStoreListItem}
           style={styles.storeList}
         />
       </SafeAreaView>
