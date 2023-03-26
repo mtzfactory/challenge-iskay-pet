@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "ENFFILE=.env react-native run-android",
     "ios": "echo \"Not implemented\"",
     "link-assets": "npx react-native-asset",
     "lint": "eslint .",
     "pod-install": "cd ios && pod install && cd ..",
     "postinstall": "react-native setup-ios-permissions && yarn pod-install",
-    "start": "react-native start --reset-cache",
+    "start": "ENVFILE=.env react-native start --reset-cache",
     "test": "jest"
   },
   "dependencies": {

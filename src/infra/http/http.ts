@@ -1,41 +1,60 @@
+import {getErrorMessage} from '~/toolbox';
+
 type Url = `https://${string}`;
 
-const headers = new Headers({
-  'Content-Type': 'application/json;charset=UTF-8',
-});
+type Config = Omit<RequestInit, 'body' | 'method'>;
 
 async function processResponse<T extends unknown>(
   response: Response,
 ): Promise<T> {
-  const data = await response.json();
+  try {
+    const data = await response.json();
 
-  if (!response.ok) {
-    const error = new Error(`${response.statusText} (${response.status})`);
+    if (!response.ok) {
+      return Promise.reject(data);
+    }
 
-    Promise.reject(error);
+    return data;
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return Promise.reject(message);
   }
-
-  return data;
 }
 
-export async function get<T extends unknown>(url: Url): Promise<T> {
-  const response = await fetch(url, {
-    headers,
-    method: 'GET',
-  });
+export const createHeaders = (headers: Headers | Record<string, string>) =>
+  new Headers(headers);
 
-  return await processResponse<T>(response);
+export async function get<T extends unknown>(
+  url: Url,
+  config: Config = {},
+): Promise<T> {
+  try {
+    const response = await fetch(url, {
+      ...config,
+      method: 'GET',
+    });
+    return await processResponse<T>(response);
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return Promise.reject(message);
+  }
 }
 
 export async function post<T extends unknown>(
   url: Url,
   params: Record<string, unknown>,
+  config: Config = {},
 ): Promise<T> {
-  const response = await fetch(url, {
-    body: JSON.stringify(params),
-    headers,
-    method: 'POST',
-  });
+  try {
+    const response = await fetch(url, {
+      ...config,
+      body: JSON.stringify(params),
+      method: 'POST',
+    });
 
-  return await processResponse<T>(response);
+    return await processResponse<T>(response);
+  } catch (error) {
+    const message = getErrorMessage(error);
+    return Promise.reject(message);
+  }
 }

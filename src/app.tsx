@@ -11,7 +11,7 @@ import {
 } from '~/components';
 import {Button, Icon, Text} from '~/components/core';
 import type {Store} from '~/models/store';
-import {getIkpStores} from '~/services/ikp-client';
+import {ikpClient} from '~/services/ikp-client';
 import {theme} from '~/theme';
 import type {Nullable} from '~/toolbox';
 
@@ -29,7 +29,8 @@ function App() {
 
   React.useEffect(function () {
     async function getStores() {
-      const {data: stores, error} = await getIkpStores();
+      const {data: stores, error} = await ikpClient.getStores();
+      console.log('stores', stores, 'error:', error);
       if (stores) {
         setIkpStores(stores);
       }
@@ -59,8 +60,9 @@ function App() {
     setSelectedStore(null);
   }
 
-  function handleOnPressTaskAssign(taskId: string) {
-    console.log('Assign task id:', taskId);
+  async function handleOnPressAssignTask(storeId: string, taskId: string) {
+    const {data, error} = await ikpClient.checkin(storeId, taskId);
+    console.log('data:', data, 'error:', error);
   }
 
   return (
@@ -101,7 +103,7 @@ function App() {
           <Text
             style={
               styles.storeLabel
-            }>{`Open from ${selectedStore?.store.schedule.from} to ${selectedStore?.store.schedule.end}`}</Text>
+            }>{`Open from ${selectedStore?.store.schedule.from} to ${selectedStore?.store.schedule.end} ${selectedStore?.store.schedule.timezone}`}</Text>
         </View>
         <View style={styles.storeDetail}>
           <Icon color={theme.colors.primary.blue} name="key" size={16} />
@@ -140,7 +142,9 @@ function App() {
                   <Button
                     small
                     label="Assign"
-                    onPress={() => handleOnPressTaskAssign(task.id)}
+                    onPress={() =>
+                      handleOnPressAssignTask(selectedStore.store.id, task.id)
+                    }
                   />
                 )}
               </View>
