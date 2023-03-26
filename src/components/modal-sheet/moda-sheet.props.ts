@@ -7,3 +7,7 @@ export interface ModalSheetProps {
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
 }
+
+export interface ModalSheetHandle {
+  show: () => void;
+}

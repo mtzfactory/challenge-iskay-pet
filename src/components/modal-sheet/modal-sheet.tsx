@@ -1,18 +1,25 @@
 import * as React from 'react';
-import BottomSheet, {
+import {
   BottomSheetView,
+  BottomSheetModal,
   useBottomSheetDynamicSnapPoints,
 } from '@gorhom/bottom-sheet';
-import {StatusBar, TouchableWithoutFeedback, View} from 'react-native';
 
 import {enhanceStyle} from '~/toolbox';
 
-import {ModalSheetProps as Props} from './moda-sheet.props';
+import {
+  ModalSheetProps as Props,
+  ModalSheetHandle as Handle,
+} from './moda-sheet.props';
 import {modalSheetStyles as styles} from './modal-sheet.styles';
+import {Overlay} from './overlay';
 
 const initialSnapPoints = ['CONTENT_HEIGHT'];
 
-export const ModalSheet = (props: Props) => {
+const ForwardModalSheet: React.ForwardRefRenderFunction<Handle, Props> = (
+  props,
+  ref,
+) => {
   const {
     children,
     visible,
@@ -20,7 +27,7 @@ export const ModalSheet = (props: Props) => {
     contentStyle: contentStyleOverrie,
     style,
   } = props;
-  const bottomSheetRef = React.useRef<BottomSheet>(null);
+  const bottomSheetRef = React.useRef<BottomSheetModal>(null);
   const {
     animatedHandleHeight,
     animatedSnapPoints,
@@ -29,36 +36,55 @@ export const ModalSheet = (props: Props) => {
   } = useBottomSheetDynamicSnapPoints(initialSnapPoints);
   const contentStyle = enhanceStyle(styles.content, contentStyleOverrie);
 
-  if (!visible) {
-    return null;
-  }
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return {
+        show() {
+          bottomSheetRef.current?.expand();
+        },
+        dismiss() {
+          bottomSheetRef.current?.dismiss();
+        },
+      };
+    },
+    [],
+  );
 
-  function handleOnClose() {
-    bottomSheetRef.current?.close();
+  React.useEffect(
+    function () {
+      visible
+        ? bottomSheetRef.current?.present()
+        : bottomSheetRef.current?.dismiss();
+    },
+    [visible],
+  );
+
+  function handleOnDismiss() {
     onDismiss?.();
   }
 
   return (
     <>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={styles.overlay.backgroundColor}
-      />
-      <TouchableWithoutFeedback onPress={handleOnClose}>
-        <View style={styles.overlay} />
-      </TouchableWithoutFeedback>
-      <BottomSheet
+      <Overlay visible={visible} onPress={handleOnDismiss} />
+      <BottomSheetModal
         ref={bottomSheetRef}
         enablePanDownToClose={true}
+        enableDismissOnClose={true}
+        snapPoints={animatedSnapPoints}
         contentHeight={animatedContentHeight}
         handleHeight={animatedHandleHeight}
-        snapPoints={animatedSnapPoints}
-        onClose={handleOnClose}
+        onDismiss={handleOnDismiss}
         backgroundStyle={style}>
         <BottomSheetView onLayout={handleContentLayout} style={contentStyle}>
           {children}
         </BottomSheetView>
-      </BottomSheet>
+      </BottomSheetModal>
     </>
   );
 };
+
+export const ModalSheet = React.forwardRef(ForwardModalSheet);
+
+export const useModalSheetRef = (initialValue = null) =>
+  React.useRef<Handle>(initialValue);
