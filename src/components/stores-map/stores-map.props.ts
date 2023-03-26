@@ -6,3 +6,7 @@ export interface StoresMapProps extends ViewPropsWithoutRefAndOmit<'children'> {
   onStoreSelect: (store: Store, index: number) => void;
   onStoreDeselect: () => void;
 }
+
+export interface StoresMapHandle {
+  selectStore: (store: Store) => void;
+}
