@@ -3,16 +3,18 @@ import type {IconProps as RNVIconProps} from 'react-native-vector-icons/Icon';
 
 import type {FeatherIconName} from './icon.font';
 
+export type IconName = FeatherIconName;
+
 export type BaseIconProps = Omit<RNVIconProps, 'name'>;
 export type IconColor = NonNullable<RNVIconProps['color']>;
 
 export type IconObject = {
   color?: IconColor;
   size?: number;
-  name: FeatherIconName;
+  name: IconName;
 };
 
-export type IconNameOrObject = FeatherIconName | IconObject;
+export type IconNameOrObject = IconName | IconObject;
 
 export type OptionalIcon =
   | {

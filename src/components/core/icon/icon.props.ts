@@ -1,11 +1,10 @@
 import type {StyleProp, ViewStyle} from 'react-native';
 
-import type {FeatherIconName} from './icon.font';
-import type {IconNameOrObject, BaseIconProps} from './icon.types';
+import type {IconName, IconNameOrObject, BaseIconProps} from './icon.types';
 
 export type IconProps =
   | BaseIconProps & {
-      name: FeatherIconName;
+      name: IconName;
       style?: StyleProp<ViewStyle>;
     };
 
