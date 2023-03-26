@@ -1,20 +1,19 @@
 import * as React from 'react';
-import {SafeAreaView, StatusBar, View} from 'react-native';
+import {Alert, SafeAreaView, StatusBar} from 'react-native';
 
 import {
   Hero,
   ModalSheet,
+  StoreDetail,
   StoreList,
   StoresMap,
   useStoreListRef,
   useStoresMapRef,
   withModalProvider,
 } from '~/components';
-import {Button, Icon, Text} from '~/components/core';
 import type {Store} from '~/models/store';
 import {withGestureHandlerProvider} from '~/providers/with-gesture-handler';
 import {ikpClient} from '~/services/ikp-client';
-import {theme} from '~/theme';
 import type {Nullable} from '~/toolbox';
 
 import {appStyles as styles} from './app.styles';
@@ -63,8 +62,16 @@ function App() {
   }
 
   async function handleOnPressAssignTask(storeId: string, taskId: string) {
-    const {data, error} = await ikpClient.checkin(storeId, taskId);
-    console.log('data:', data, 'error:', error);
+    const {error} = await ikpClient.checkin(storeId, taskId);
+
+    if (error) {
+      return Alert.alert(
+        'Error',
+        `Error assigning ${taskId} from store ${storeId}\n\n${error}`,
+      );
+    }
+
+    // TODO: If success, update the local store.
   }
 
   function handleOnPressStoreListItem(store: Store, index: number) {
@@ -98,68 +105,32 @@ function App() {
         visible={!!selectedStore}
         onDismiss={handleOnDismissModal}
         contentStyle={styles.modal}>
-        <Text bold style={styles.storeHeader}>
-          {selectedStore?.store.name}
-        </Text>
-        <View style={styles.storeDetail}>
-          <Icon color={theme.colors.primary.blue} name="map-pin" size={16} />
-          <Text style={styles.storeLabel}>
-            {selectedStore?.store.address.direction}
-          </Text>
-        </View>
-        <View style={styles.storeDetail}>
-          <Icon color={theme.colors.primary.blue} name="clock" size={16} />
-          <Text
-            style={
-              styles.storeLabel
-            }>{`Open from ${selectedStore?.store.schedule.from} to ${selectedStore?.store.schedule.end} ${selectedStore?.store.schedule.timezone}`}</Text>
-        </View>
-        <View style={styles.storeDetail}>
-          <Icon color={theme.colors.primary.blue} name="key" size={16} />
-          <Text style={styles.storeLabel}>
-            {`Currently is ${selectedStore?.store.open ? 'OPEN' : 'CLOSED'}`}
-          </Text>
-        </View>
-        <View style={styles.storeDetail}>
-          <Icon color={theme.colors.primary.blue} name="truck" size={16} />
-          <Text style={styles.storeLabel}>Shipping methods</Text>
-        </View>
-        {selectedStore?.store.shipping_methods.map((method, index) => (
-          <View key={method.id} style={[styles.storeSubDetail, styles.indent]}>
-            <Text>{`${index + 1}.`}</Text>
-            <View style={styles.storeLabel}>
-              <Text>{method.name}</Text>
-              <Text variant="label">{method.description}</Text>
-            </View>
-          </View>
-        ))}
-        <View style={styles.storeDetail}>
-          <Icon color={theme.colors.primary.blue} name="package" size={16} />
-          <Text style={styles.storeLabel}>Tasks</Text>
-        </View>
-        {selectedStore?.store.tasks.map((task, index) => (
-          <View key={task.id} style={[styles.storeSubDetail, styles.indent]}>
-            <Text>{`${index + 1}.`}</Text>
-            <View style={[styles.storeLabel, styles.task]}>
-              <Text style={styles.taskDescription}>{task.description}</Text>
-              <View style={styles.taskAssign}>
-                {task.assigned ? (
-                  <Text bold center variant="label" style={styles.taskAssigned}>
-                    Assigned
-                  </Text>
-                ) : (
-                  <Button
-                    small
-                    label="Assign"
-                    onPress={() =>
-                      handleOnPressAssignTask(selectedStore.store.id, task.id)
-                    }
-                  />
-                )}
-              </View>
-            </View>
-          </View>
-        ))}
+        <StoreDetail name={selectedStore?.store.name}>
+          <StoreDetail.Item
+            icon="map-pin"
+            label={selectedStore?.store.address.direction}
+          />
+          <StoreDetail.Item
+            icon="clock"
+            label={`Open from ${selectedStore?.store.schedule.from} to ${selectedStore?.store.schedule.end} ${selectedStore?.store.schedule.timezone}`}
+          />
+          <StoreDetail.Item
+            icon="key"
+            label={`Currently is ${
+              selectedStore?.store.open ? 'OPEN' : 'CLOSED'
+            }`}
+          />
+          <StoreDetail.Item icon="truck" label="Shipping methods" />
+          <StoreDetail.ShippingMethods
+            methods={selectedStore?.store.shipping_methods}
+          />
+          <StoreDetail.Item icon="package" label="Tasks" />
+          <StoreDetail.Tasks
+            storeId={selectedStore?.store.id}
+            tasks={selectedStore?.store.tasks}
+            onPress={handleOnPressAssignTask}
+          />
+        </StoreDetail>
       </ModalSheet>
     </>
   );
