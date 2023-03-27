@@ -3,7 +3,7 @@ import {Store} from '~/types';
 
 export type ErrorObject = {
   message: string;
-  code: string;
+  code: number;
 };
 
 type SelectedStore = Nullable<{

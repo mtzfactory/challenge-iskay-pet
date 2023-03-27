@@ -1,6 +1,8 @@
+import produce from 'immer';
+
 import {Store} from '~/types';
 
-import {StoresContextActions, StoresState} from './stores.types';
+import {ErrorObject, StoresContextActions, StoresState} from './stores.types';
 
 export const initialState: StoresState = {
   error: null,
@@ -10,20 +12,31 @@ export const initialState: StoresState = {
 };
 
 function updateStore(stores: Store[], storeId: string, taskId: string) {
-  const storeToUpdate = stores.find(store => store.id === storeId);
+  const storeToUpdateIndex = stores.findIndex(store => store.id === storeId);
 
-  if (!storeToUpdate) {
+  if (storeToUpdateIndex < 0) {
     return stores;
   }
 
-  const taskToUpdate = storeToUpdate?.tasks.find(task => task.id === taskId);
+  const taskToUpdateIndex = stores[storeToUpdateIndex].tasks.findIndex(
+    task => task.id === taskId,
+  );
 
-  const updatedStore = {
-    ...storeToUpdate,
-    tasks: [...storeToUpdate.tasks, {...taskToUpdate, assigned: true}],
+  const nextStores = produce(stores, draftStores => {
+    draftStores[storeToUpdateIndex].tasks[taskToUpdateIndex].assigned = true;
+  });
+
+  return nextStores;
+}
+
+const errorToString = (error: ErrorObject) =>
+  `${error.message} (${error.code})`;
+
+function createError(error: ErrorObject) {
+  return {
+    ...error,
+    toString: () => errorToString(error),
   };
-
-  return {...stores, updatedStore};
 }
 
 export function storesReducer(
@@ -33,7 +46,7 @@ export function storesReducer(
   switch (action.type) {
     case 'ERROR':
       return {
-        error: action.payload,
+        error: createError(action.payload),
         loading: false,
         selectedStore: null,
         stores: [],
