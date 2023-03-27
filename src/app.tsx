@@ -12,29 +12,38 @@ import {
   withModalProvider,
 } from '~/components';
 import {useStoresContext, withStoresProvider} from '~/context';
+import {ErrorObject} from '~/context/stores/stores.types';
 import {withGestureHandlerProvider} from '~/providers';
 import {ikpClient} from '~/services/ikp-client';
 import type {Store} from '~/types';
 
 import {appStyles as styles} from './app.styles';
 
+function getRequestingStoresErrorMessage(error: ErrorObject | null) {
+  return error ? `${error.message} (${error.code})` : undefined;
+}
+
 function App() {
   const {
     assignStoreTask,
     clearSelectedStore,
+    requestingStores,
     selectStore,
-    selectedStore,
-    stores: ikpStores,
+    setError,
     setStores,
+    ...state
   } = useStoresContext();
   const storeListRef = useStoreListRef();
   const storesMapRef = useStoresMapRef();
+  const requestingStoresErrorMessage = getRequestingStoresErrorMessage(
+    state.error,
+  );
+  const {loading: loadingStores, selectedStore, stores} = state;
 
   async function getStores() {
+    requestingStores();
     const {data: stores, error} = await ikpClient.getStores();
-    if (stores) {
-      setStores(stores);
-    }
+    stores ? setStores(stores) : setError(error);
   }
 
   React.useEffect(function () {
@@ -81,6 +90,10 @@ function App() {
     handleOnStoreSelect(store, index);
   }
 
+  function handleOnRefresStroeList() {
+    getStores();
+  }
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -90,7 +103,7 @@ function App() {
         />
         <StoresMap
           ref={storesMapRef}
-          stores={ikpStores}
+          stores={stores}
           onStoreSelect={handleOnStoreSelect}
           onStoreDeselect={handleOnStoreDeselect}
           style={styles.map}
@@ -98,8 +111,11 @@ function App() {
         <Hero text="IskayPet Challenge" style={styles.hero} />
         <StoreList
           ref={storeListRef}
-          stores={ikpStores}
+          error={requestingStoresErrorMessage}
+          stores={stores}
+          loading={loadingStores}
           onPress={handleOnPressStoreListItem}
+          onRefresh={handleOnRefresStroeList}
           style={styles.storeList}
         />
       </SafeAreaView>
