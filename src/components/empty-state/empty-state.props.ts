@@ -1,5 +1,14 @@
 import {ViewPropsWithoutRef} from '~/toolbox';
 
-export interface EmptyStateProps extends ViewPropsWithoutRef {
+export type EmptyStateProps = ViewPropsWithoutRef & {
   text: string;
-}
+} & (
+    | {
+        label?: never;
+        onPress?: never;
+      }
+    | {
+        label: string;
+        onPress: () => void;
+      }
+  );
