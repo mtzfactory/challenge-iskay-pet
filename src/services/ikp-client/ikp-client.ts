@@ -1,8 +1,13 @@
 import Config from 'react-native-config';
 
-import {createHeaders, get as httpGet, post as httpPost} from '~/infra/http';
+import {
+  createHeaders,
+  get as httpGet,
+  HttpError,
+  post as httpPost,
+} from '~/infra/http';
 import {getErrorMessage} from '~/toolbox';
-import type {Store} from '~/types';
+import type {ErrorResponse, Store} from '~/types';
 
 import {paths} from './paths';
 
@@ -25,9 +30,15 @@ const getStores = (baseUrl: Url, get: Get) => async () => {
       headers,
     });
     return {data: stores, error: null};
-  } catch (error) {
-    const message = getErrorMessage(error);
-    return {data: null, error: message};
+  } catch (exception) {
+    const error = {code: 0, message: getErrorMessage(exception)};
+
+    if (exception instanceof HttpError) {
+      error.code = (exception.payload as ErrorResponse).statusCode;
+      error.message = getErrorMessage(exception.payload);
+    }
+
+    return {data: null, error};
   }
 };
 
@@ -40,9 +51,15 @@ const chekin =
         {headers},
       );
       return {data: response, error: null};
-    } catch (error) {
-      const message = getErrorMessage(error);
-      return {data: null, error: message};
+    } catch (exception) {
+      const error = {code: 0, message: getErrorMessage(exception)};
+
+      if (exception instanceof HttpError) {
+        error.code = (exception.payload as ErrorResponse).statusCode;
+        error.message = getErrorMessage(exception.payload);
+      }
+
+      return {data: null, error};
     }
   };
 
