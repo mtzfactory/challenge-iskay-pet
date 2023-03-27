@@ -10,17 +10,16 @@ interface Props {
   methods: ShippingMethod[] | undefined;
 }
 
-export const StoreDetailShippingMetods = ({methods}: Props) =>
-  methods?.length ? (
-    <>
-      {methods.map((method, index) => (
-        <View key={method.id} style={[styles.itemDetail, styles.indent]}>
-          <Text>{`${index + 1}.`}</Text>
-          <View style={styles.itemLabel}>
-            <Text>{method.name}</Text>
-            <Text variant="label">{method.description}</Text>
-          </View>
+export const StoreDetailShippingMetods = ({methods}: Props) => (
+  <>
+    {methods?.map((method, index) => (
+      <View key={method.id} style={[styles.itemDetail, styles.indent]}>
+        <Text>{`${index + 1}.`}</Text>
+        <View style={styles.itemLabel}>
+          <Text>{method.name}</Text>
+          <Text variant="label">{method.description}</Text>
         </View>
-      ))}
-    </>
-  ) : null;
+      </View>
+    ))}
+  </>
+);
