@@ -12,16 +12,11 @@ import {
   withModalProvider,
 } from '~/components';
 import {useStoresContext, withStoresProvider} from '~/context';
-import {ErrorObject} from '~/context/stores/stores.types';
 import {withGestureHandlerProvider} from '~/providers';
-import {ikpClient} from '~/services/ikp-client';
+import {ikpClient} from '~/services';
 import type {Store} from '~/types';
 
 import {appStyles as styles} from './app.styles';
-
-function getRequestingStoresErrorMessage(error: ErrorObject | null) {
-  return error ? `${error.message} (${error.code})` : undefined;
-}
 
 function App() {
   const {
@@ -35,15 +30,17 @@ function App() {
   } = useStoresContext();
   const storeListRef = useStoreListRef();
   const storesMapRef = useStoresMapRef();
-  const requestingStoresErrorMessage = getRequestingStoresErrorMessage(
-    state.error,
-  );
-  const {loading: loadingStores, selectedStore, stores} = state;
+  const {
+    error: errorRequestingStores,
+    loading: loadingStores,
+    selectedStore,
+    stores,
+  } = state;
 
   async function getStores() {
     requestingStores();
-    const {data: stores, error} = await ikpClient.getStores();
-    stores ? setStores(stores) : setError(error);
+    const {data, error} = await ikpClient.getStores();
+    data ? setStores(data) : setError(error);
   }
 
   React.useEffect(function () {
@@ -75,14 +72,17 @@ function App() {
   async function handleOnPressAssignTask(storeId: string, taskId: string) {
     const {error} = await ikpClient.checkin(storeId, taskId);
 
-    if (error) {
-      return Alert.alert(
-        'Error',
-        `Error assigning ${taskId} from store ${storeId}\n\n${error}`,
-      );
+    // The backend responds to all ckeckin attempts with a 403 (Forbidden) response,
+    // even when the task is NOT assigned.
+    // We understand it's a bug, so it's treated as a valid response.
+    if (error?.code === 403) {
+      return assignStoreTask(storeId, taskId);
     }
 
-    // TODO: If success, update the local store.
+    Alert.alert(
+      'Error',
+      `Error assigning ${taskId} from store ${storeId}\n\n${error?.message}`,
+    );
   }
 
   function handleOnPressStoreListItem(store: Store, index: number) {
@@ -111,7 +111,7 @@ function App() {
         <Hero text="IskayPet Challenge" style={styles.hero} />
         <StoreList
           ref={storeListRef}
-          error={requestingStoresErrorMessage}
+          error={errorRequestingStores?.toString()}
           stores={stores}
           loading={loadingStores}
           onPress={handleOnPressStoreListItem}
