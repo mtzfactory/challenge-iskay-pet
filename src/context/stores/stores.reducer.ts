@@ -13,11 +13,6 @@ export const initialState: StoresState = {
 
 function updateStore(stores: Store[], storeId: string, taskId: string) {
   const storeToUpdateIndex = stores.findIndex(store => store.id === storeId);
-
-  if (storeToUpdateIndex < 0) {
-    return stores;
-  }
-
   const taskToUpdateIndex = stores[storeToUpdateIndex].tasks.findIndex(
     task => task.id === taskId,
   );
@@ -26,7 +21,7 @@ function updateStore(stores: Store[], storeId: string, taskId: string) {
     draftStores[storeToUpdateIndex].tasks[taskToUpdateIndex].assigned = true;
   });
 
-  return nextStores;
+  return {updatedStoreIndex: storeToUpdateIndex, nextStores};
 }
 
 const errorToString = (error: ErrorObject) =>
@@ -71,13 +66,17 @@ export function storesReducer(
         stores: action.paylaod,
       };
     case 'UPDATE_STORE':
+      const {storeId, taskId} = action.payload;
+      const {updatedStoreIndex, nextStores} = updateStore(
+        state.stores,
+        storeId,
+        taskId,
+      );
+      const nextSelectedStore = nextStores[updatedStoreIndex];
       return {
         ...state,
-        stores: updateStore(
-          state.stores,
-          action.payload.storeId,
-          action.payload.taskId,
-        ),
+        stores: nextStores,
+        selectedStore: {index: updatedStoreIndex, store: nextSelectedStore},
       };
     default:
       return state;
