@@ -1,17 +1,18 @@
 import * as React from 'react';
-import {FlatList} from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import type {ListRenderItemInfo} from 'react-native';
 
-import {EmptyState, ListItem} from '~/components';
-import {Icon, Pill} from '~/components/core';
+import {ListItem} from '~/components';
+import {Icon, Pill, Text} from '~/components/core';
 import {enhanceStyle} from '~/toolbox';
 import type {Store} from '~/types';
 
+import {EmptyList, ErrorState, LoadingState} from './store-list.empty-states';
 import {
   StoreListProps as Props,
   StoreListHandle as Handle,
 } from './store-list.props';
-import {emptyStateIcon, storeListStyles as styles} from './store-list.styles';
+import {storeListStyles as styles} from './store-list.styles';
 
 const keyExtractor = (item: Store) => item.id;
 
@@ -24,7 +25,14 @@ const ForwardStoreList: React.ForwardRefRenderFunction<Handle, Props> = (
   props,
   ref,
 ) => {
-  const {stores, onPress, style: stylesOverride} = props;
+  const {
+    error = null,
+    stores = [],
+    loading = false,
+    onPress,
+    onRefresh,
+    style: stylesOverride,
+  } = props;
   const containerStyle = enhanceStyle(styles.container, stylesOverride);
   const flatListRef = React.useRef<FlatList>(null);
 
@@ -38,16 +46,16 @@ const ForwardStoreList: React.ForwardRefRenderFunction<Handle, Props> = (
     [],
   );
 
+  if (error) {
+    return <ErrorState label={error} onPress={onRefresh} />;
+  }
+
+  if (loading) {
+    return <LoadingState />;
+  }
+
   if (!stores.length) {
-    return (
-      <EmptyState text="You are all done!">
-        <Icon
-          name="coffee"
-          size={emptyStateIcon.size}
-          color={emptyStateIcon.color}
-        />
-      </EmptyState>
-    );
+    return <EmptyList onPress={onRefresh} />;
   }
 
   const renderIkpStoreItem = ({item, index}: ListRenderItemInfo<Store>) => (

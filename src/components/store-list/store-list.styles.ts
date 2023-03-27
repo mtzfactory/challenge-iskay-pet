@@ -11,8 +11,3 @@ export const storeListStyles = StyleSheet.create<Styles>({
     marginHorizontal: theme.spacing.tiny,
   },
 });
-
-export const emptyStateIcon = {
-  color: theme.colors.primary.green,
-  size: 68,
-};
