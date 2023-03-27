@@ -11,33 +11,35 @@ import {
   useStoresMapRef,
   withModalProvider,
 } from '~/components';
-import {withGestureHandlerProvider} from '~/providers/with-gesture-handler';
+import {useStoresContext, withStoresProvider} from '~/context';
+import {withGestureHandlerProvider} from '~/providers';
 import {ikpClient} from '~/services/ikp-client';
-import type {Nullable} from '~/toolbox';
 import type {Store} from '~/types';
 
 import {appStyles as styles} from './app.styles';
 
-type SelectedStore = Nullable<{
-  store: Store;
-  index: number;
-}>;
-
 function App() {
-  const [ikpStores, setIkpStores] = React.useState<Store[]>([]);
-  const [selectedStore, setSelectedStore] = React.useState<SelectedStore>(null);
+  const {
+    assignStoreTask,
+    clearSelectedStore,
+    selectStore,
+    selectedStore,
+    stores: ikpStores,
+    setStores,
+  } = useStoresContext();
   const storeListRef = useStoreListRef();
   const storesMapRef = useStoresMapRef();
 
-  React.useEffect(function () {
-    async function getStores() {
-      const {data: stores, error} = await ikpClient.getStores();
-      if (stores) {
-        setIkpStores(stores);
-      }
+  async function getStores() {
+    const {data: stores, error} = await ikpClient.getStores();
+    if (stores) {
+      setStores(stores);
     }
+  }
 
+  React.useEffect(function () {
     getStores();
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   React.useEffect(
@@ -46,19 +48,19 @@ function App() {
         ? storeListRef.current?.scrollToIndex(selectedStore.index)
         : storeListRef.current?.scrollToIndex(0);
     },
-    [ikpStores, selectedStore, storeListRef],
+    [selectedStore, storeListRef],
   );
 
   function handleOnStoreSelect(store: Store, index: number) {
-    setSelectedStore({store, index});
+    selectStore(store, index);
   }
 
   function handleOnStoreDeselect() {
-    setSelectedStore(null);
+    clearSelectedStore();
   }
 
   function handleOnDismissModal() {
-    setSelectedStore(null);
+    clearSelectedStore();
   }
 
   async function handleOnPressAssignTask(storeId: string, taskId: string) {
@@ -136,4 +138,6 @@ function App() {
   );
 }
 
-export default withGestureHandlerProvider(withModalProvider(App));
+export default withGestureHandlerProvider(
+  withModalProvider(withStoresProvider(App)),
+);
