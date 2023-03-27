@@ -4,8 +4,8 @@ import type {ListRenderItemInfo} from 'react-native';
 
 import {EmptyState, ListItem} from '~/components';
 import {Icon, Pill} from '~/components/core';
-import {Store} from '~/models';
 import {enhanceStyle} from '~/toolbox';
+import type {Store} from '~/types';
 
 import {
   StoreListProps as Props,

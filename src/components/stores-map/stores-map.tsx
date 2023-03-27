@@ -2,7 +2,7 @@ import * as React from 'react';
 import MapView, {MapMarker} from 'react-native-maps';
 import type {MarkerPressEvent} from 'react-native-maps';
 
-import type {Store} from '~/models';
+import type {Store} from '~/types';
 
 import {
   StoresMapProps as Props,

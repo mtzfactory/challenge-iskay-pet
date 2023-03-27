@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View} from 'react-native';
 
 import {Button, Text} from '~/components/core';
-import {Task} from '~/models';
+import type {Task} from '~/types';
 
 import {storeDetailStyles as styles} from './store-detail.styles';
 

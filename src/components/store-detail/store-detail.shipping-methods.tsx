@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View} from 'react-native';
 
 import {Text} from '~/components/core';
-import {ShippingMethod} from '~/models';
+import type {ShippingMethod} from '~/types';
 
 import {storeDetailStyles as styles} from './store-detail.styles';
 
@@ -10,7 +10,7 @@ interface Props {
   methods: ShippingMethod[] | undefined;
 }
 
-export const StoreDetailShipingMetods = ({methods}: Props) =>
+export const StoreDetailShippingMetods = ({methods}: Props) =>
   methods?.length ? (
     <>
       {methods.map((method, index) => (

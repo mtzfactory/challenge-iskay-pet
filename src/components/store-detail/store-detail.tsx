@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {Text} from '~/components/core';
 
 import {StoreDetailItem} from './store-detail.item';
-import {StoreDetailShipingMetods} from './store-detail.shipping-methods';
+import {StoreDetailShippingMetods} from './store-detail.shipping-methods';
 import {StoreDetailProps as Props} from './store-detail.props';
 import {storeDetailStyles as styles} from './store-detail.styles';
 import {StoreDetailTasks} from './store-detail.tasks';
@@ -19,5 +19,5 @@ export const StoreDetail = ({children, name, ...rest}: Props) => (
 );
 
 StoreDetail.Item = StoreDetailItem;
-StoreDetail.ShippingMethods = StoreDetailShipingMetods;
+StoreDetail.ShippingMethods = StoreDetailShippingMetods;
 StoreDetail.Tasks = StoreDetailTasks;

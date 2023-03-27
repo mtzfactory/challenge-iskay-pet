@@ -1,5 +1,5 @@
-import {Store} from '~/models';
-import {ViewPropsWithoutRefAndOmit} from '~/toolbox';
+import type {ViewPropsWithoutRefAndOmit} from '~/toolbox';
+import type {Store} from '~/types';
 
 export interface StoreListProps extends ViewPropsWithoutRefAndOmit<'children'> {
   stores: Store[];

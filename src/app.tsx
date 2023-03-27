@@ -11,10 +11,10 @@ import {
   useStoresMapRef,
   withModalProvider,
 } from '~/components';
-import type {Store} from '~/models/store';
 import {withGestureHandlerProvider} from '~/providers/with-gesture-handler';
 import {ikpClient} from '~/services/ikp-client';
 import type {Nullable} from '~/toolbox';
+import type {Store} from '~/types';
 
 import {appStyles as styles} from './app.styles';
 

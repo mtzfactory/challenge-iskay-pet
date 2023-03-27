@@ -1,8 +1,8 @@
 import Config from 'react-native-config';
 
 import {createHeaders, get as httpGet, post as httpPost} from '~/infra/http';
-import {Store} from '~/models';
 import {getErrorMessage} from '~/toolbox';
+import type {Store} from '~/types';
 
 import {paths} from './paths';
 
