@@ -16,6 +16,14 @@ export type None = null | undefined;
 export type Nullable<T> = T | None;
 
 /**
+ * React children.
+ */
+export type Children =
+  | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  | React.ReactFragment
+  | React.ReactPortal;
+
+/**
  * Pressable component props without ref.
  */
 export type PressablePropsWithoutRef = React.ComponentPropsWithoutRef<
