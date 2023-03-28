@@ -8,7 +8,7 @@ describe('error', function () {
     ];
 
     it.each(errors)('should get the message from a %s', function (_, error) {
-      expect(getErrorMessage(error)).toBe('Lorem Ipsum');
+      expect(getErrorMessage(error)).toBe('Lorem ipsum');
     });
   });
 });

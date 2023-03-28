@@ -17,7 +17,11 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
   }
 
   try {
-    return new Error(JSON.stringify(maybeError));
+    return new Error(
+      typeof maybeError === 'number' || typeof maybeError === 'string'
+        ? maybeError.toString()
+        : JSON.stringify(maybeError),
+    );
   } catch {
     // fallback in case there's an error stringifying the maybeError
     // like with circular references for example.
