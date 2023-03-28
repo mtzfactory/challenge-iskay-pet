@@ -1,6 +1,7 @@
-import { renderHook } from '@testing-library/react-hooks';
+import * as React from 'react';
+import {renderHook} from '@testing-library/react-hooks';
 
-import { contextFactory } from './context-factory';
+import {contextFactory} from './context-factory';
 
 interface TestCtx {
   value: number;
@@ -24,23 +25,21 @@ describe('context-factory', () => {
   it('use context hook should thrown an error if not used inside a provider', function () {
     const [_, useTestContext] = contextFactory<TestCtx>();
 
-    const { result } = renderHook(() => useTestContext());
+    const {result} = renderHook(() => useTestContext());
 
     expect(result.error?.message).toBe(
-      'useContext must be used inside of a Provider with a value.'
+      'useContext must be used inside of a Provider with a value.',
     );
   });
 
-  it('use context hook should thrown an error if not used inside a provider', function () {
+  it('use context hook should return the context values', function () {
     const [TestContext, useTestContext] = contextFactory<TestCtx>();
-    const wrapper = ({ children }: { children: React.ReactElement }) => (
-      <TestContext.Provider value={{ value: 1 }}>
-        {children}
-      </TestContext.Provider>
+    const wrapper = ({children}: {children: React.ReactElement}) => (
+      <TestContext.Provider value={{value: 1}}>{children}</TestContext.Provider>
     );
-    const { result } = renderHook(() => useTestContext(), { wrapper });
+    const {result} = renderHook(() => useTestContext(), {wrapper});
 
     expect(result.error?.message).toBeUndefined();
-    expect(result.current).toEqual({ value: 1 });
+    expect(result.current).toEqual({value: 1});
   });
 });

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {ActivityIndicator, FlatList, View} from 'react-native';
+import {FlatList} from 'react-native';
 import type {ListRenderItemInfo} from 'react-native';
 
 import {ListItem} from '~/components';
-import {Icon, Pill, Text} from '~/components/core';
+import {Pill} from '~/components/core';
 import {enhanceStyle} from '~/toolbox';
 import type {Store} from '~/types';
 
