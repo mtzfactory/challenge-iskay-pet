@@ -26,8 +26,8 @@ or the [iOS SDK][sdk-api-key-ios].
 
 The bundleId is `com.iskaypetchallenge`.
 
-To obtain the signing-certificate fingerprint (SHA1) of the Android application, please,
-use this command:
+To obtain the signing-certificate fingerprint (SHA1) of the Android application,
+please, use this command:
 
 ```bash
 keytool -keystore android/app/debug.keystore -list -v
@@ -63,6 +63,9 @@ therefore I can not build and test the iOS version.
 
 ## Packages
 
+- [immer][immer-package]: Create the next immutable state by mutating the current
+  one.
+
 - [react-native-bottom-sheet][react-native-bottom-sheet-package]: A performant
   interactive bottom sheet with fully configurable options.
 
@@ -73,16 +76,24 @@ therefore I can not build and test the iOS version.
   API exposing platform native touch and gesture system to React Native.
 
 - [react-native-maps][react-native-maps-package]: React Native Map components
-  for iOS + Android
+  for iOS + Android.
 
 - [react-native-permissions][react-native-permissions-package]: An unified
   permissions API for React Native on iOS, Android and Windows.
 
 - [react-native-reanimated][react-native-reanimated-package]: React Native's
-  Animated library reimplemented
+  Animated library reimplemented.
 
 - [react-native-vector-icons][react-native-vector-icons-package]: Customizable
   Icons for React Native with support for image source and full styling.
+
+### Dev Dependencies
+
+- [@testing-library/jest-native][testing-library-jest-native-package]: Custom jest
+  matchers to test the state of React Native.
+
+- [@testing-library/react-native][testing-library-react-native-package]: Simple
+  and complete React Native testing utilities that encourage good testing practices.
 
 ## Future
 
@@ -95,7 +106,8 @@ therefore I can not build and test the iOS version.
 
 ### Android
 
-- _Invariant Violation: requireNativeComponent: "AIRMap" was not found in the UI Manager_.
+- _Invariant Violation: requireNativeComponent: "AIRMap" was not found in the
+  UI Manager_.
 
   Solution: [issue #3081][react-native-maps-issues-3081].
 
@@ -105,10 +117,19 @@ therefore I can not build and test the iOS version.
   androidMapsUtilsVersion = "0.5+"
   ```
 
+<!-- Links -->
+
 [appstate-listener]: https://reactnative.dev/docs/appstate/#addeventlistener
 [environment-setup]: https://reactnative.dev/docs/environment-setup
 [google-maps]: https://developers.google.com/maps/documentation/
 [ikp-mobile-challenge]: https://github.com/manuelabarca/ikp-mobile-challenge
+[react-native-maps-issues-3081]: https://github.com/react-native-maps/react-native-maps/issues/3081
+[sdk-api-key-android]: https://developers.google.com/maps/documentation/android-sdk
+[sdk-api-key-ios]: https://developers.google.com/maps/documentation/ios-sdk
+
+<!-- Packages -->
+
+[immer-package]: https://github.com/immerjs/immer
 [react-native-bottom-sheet-package]: https://github.com/gorhom/react-native-bottom-sheet
 [react-native-clusterer-package]: https://github.com/JiriHoffmann/react-native-clusterer
 [react-native-config-package]: https://github.com/luggit/react-native-config
@@ -118,6 +139,5 @@ therefore I can not build and test the iOS version.
 [react-native-map-clustering-package]: https://github.com/venits/react-native-map-clustering
 [react-native-maps-package]: https://github.com/react-native-maps/react-native-maps
 [react-native-vector-icons-package]: https://github.com/oblador/react-native-vector-icons
-[react-native-maps-issues-3081]: https://github.com/react-native-maps/react-native-maps/issues/3081
-[sdk-api-key-android]: https://developers.google.com/maps/documentation/android-sdk
-[sdk-api-key-ios]: https://developers.google.com/maps/documentation/ios-sdk
+[testing-library-jest-native-package]: https://github.com/testing-library/jest-native
+[testing-library-react-native-package]: https://github.com/callstack/react-native-testing-library
