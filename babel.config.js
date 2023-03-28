@@ -6,6 +6,7 @@ module.exports = {
       {
         root: ['./'],
         alias: {
+          '~/test': ['./test/'],
           '^~/(.+)': './src/\\1',
         },
       },

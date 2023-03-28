@@ -1,0 +1,89 @@
+[
+  {
+    "id": "1234",
+    "name": "Tiendanimal (Parque Comercial Malaga Nostrum)",
+    "address": {
+      "direction": "C. Palencia, 5, 29004 Málaga",
+      "coordinate": {
+        "lat": "36.6834695",
+        "lng": "-4.4706081"
+      }
+    },
+    "tasks": [
+      {
+        "id": "5678",
+        "description": "Restock dogfood",
+        "assigned": true
+      },
+      {
+        "id": "5679",
+        "description": "Sell",
+        "assigned": false
+      },
+      {
+        "id": "5680",
+        "description": "Wash aquarios",
+        "assigned": false
+      }
+    ],
+    "open": true,
+    "schedule": {
+      "from": "9:00am",
+      "end": "5:00pm",
+      "timezone": "PST"
+    },
+    "shipping_methods": [
+      {
+        "id": "001",
+        "name": "Standard Shipping",
+        "description": "Delivery within 5-7 business days"
+      }
+    ]
+  },
+  {
+    "id": "5678",
+    "name": "Tiendanimal (Centro Comercial Larios Centro)",
+    "address": {
+      "direction": "C. Larios, Av de la Aurora 21, planta (C, 29002 Málaga)",
+      "coordinate": {
+        "lat": "36.6934458",
+        "lng": "-4.4661414"
+      }
+    },
+    "tasks": [
+      {
+        "id": "9012",
+        "description": "Clean floors",
+        "assigned": false
+      },
+      {
+        "id": "9013",
+        "description": "Restock cat toys",
+        "assigned": false
+      },
+      {
+        "id": "9014",
+        "description": "Check animals",
+        "assigned": false
+      }
+    ],
+    "open": false,
+    "schedule": {
+      "from": "10:00am",
+      "end": "6:00pm",
+      "timezone": "PST"
+    },
+    "shipping_methods": [
+      {
+        "id": "002",
+        "name": "Click and Collect",
+        "description": "Pick up in store"
+      },
+      {
+        "id": "001",
+        "name": "Standard Shipping",
+        "description": "Delivery within 5-7 business days"
+      }
+    ]
+  }
+]
