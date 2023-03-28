@@ -4,6 +4,7 @@ import {
   checkMultiple,
   requestMultiple,
   PERMISSIONS,
+  RESULTS,
 } from 'react-native-permissions';
 import type {Permission, PermissionStatus} from 'react-native-permissions';
 
@@ -22,7 +23,7 @@ enum Location {
   Checking = 'Checking',
 }
 
-const locationPermissions: Permission[] =
+const getLocationPermissions: () => Permission[] = () =>
   Platform.OS === 'ios'
     ? [PERMISSIONS.IOS.LOCATION_WHEN_IN_USE]
     : [
@@ -35,13 +36,14 @@ export const LocationPermission = (props: Props) => {
   const [locationGranted, setLocationGranted] = React.useState(
     Location.Checking,
   );
+  const locationPermissions = React.useMemo(() => getLocationPermissions(), []);
 
   function checkResult(
     permissions: Permission[],
     result: Record<Permission, PermissionStatus>,
   ) {
     const granted = permissions.every(
-      permission => result[permission] === 'granted',
+      permission => result[permission] === RESULTS.GRANTED,
     );
     setLocationGranted(granted ? Location.Granted : Location.NotGranted);
   }
@@ -53,6 +55,7 @@ export const LocationPermission = (props: Props) => {
     }
 
     checkLocationPermission();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (locationGranted === Location.Checking) {
@@ -68,7 +71,7 @@ export const LocationPermission = (props: Props) => {
       return (
         <>
           {children}
-          <View style={overlayStyle} />
+          <View testID="location-permission-overlay" style={overlayStyle} />
         </>
       );
     }
@@ -86,7 +89,7 @@ export const LocationPermission = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.hero}>
-        <Hero text={'Lets set things up.\nWe need access to'} />
+        <Hero text={"Let's set things up.\nWe need access to"} />
       </View>
       <View style={styles.description}>
         <View style={styles.service}>
