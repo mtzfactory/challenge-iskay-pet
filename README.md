@@ -94,6 +94,9 @@ therefore I can not build and test the iOS version.
 - [@testing-library/jest-native][testing-library-jest-native-package]: Custom jest
   matchers to test the state of React Native.
 
+- [@testing-library/react-hooks][testing-library-react-hooks-package]: Simple and
+  complete React hooks testing utilities that encourage good testing practices.
+
 - [@testing-library/react-native][testing-library-react-native-package]: Simple
   and complete React Native testing utilities that encourage good testing practices.
 
@@ -142,4 +145,5 @@ therefore I can not build and test the iOS version.
 [react-native-maps-package]: https://github.com/react-native-maps/react-native-maps
 [react-native-vector-icons-package]: https://github.com/oblador/react-native-vector-icons
 [testing-library-jest-native-package]: https://github.com/testing-library/jest-native
+[testing-library-react-hooks-package]: https://github.com/testing-library/react-hooks-testing-library
 [testing-library-react-native-package]: https://github.com/callstack/react-native-testing-library
