@@ -9,6 +9,8 @@
 
 Solution to the [IskayPet Mobile Challenge][ikp-mobile-challenge].
 
+Please, take a look to the application [screenshots](./screenshots/screenshots.md).
+
 ## Install dependencies
 
 Install dependencies executing the following command:

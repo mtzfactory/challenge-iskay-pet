@@ -1,0 +1,7 @@
+![Asking permissions to the user](./location-services.png)
+![Loading the stores](./loading-stores.png)
+![Stores loaded successfully](./stores-loaded.png)
+![Error while loading stores](./loading-error.png)
+![There are no stores](./you-are-all-done.png)
+![Detail of a store](./store-detail.png)
+![Alerting the user there was an error assigning task](./checkin-error.png)
