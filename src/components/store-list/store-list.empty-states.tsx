@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 import {EmptyState} from '~/components';
-import {Icon, Text} from '~/components/core';
+import {Icon} from '~/components/core';
 import {theme} from '~/theme';
 
 type OnPress = () => void;
